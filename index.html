@@ -1,174 +1,309 @@
- <!DOCTYPE html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Korobochka — Портфолио</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Korobochka Art Portfolio</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #4a4a4a;
-            background: linear-gradient(135deg, #8B7355 0%, #6B5B4F 100%);
-            min-height: 100vh;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: linear-gradient(135deg, #d8d0bd, #b8aa8f);
+      color: #3f3a2f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+    }
 
-        h1 {
-            font-size: 2.5em;
-            color: #5D4E37;
-            margin-bottom: 10px;
-        }
+    header h1 {
+      font-size: 42px;
+      letter-spacing: 2px;
+      color: #3b3328;
+      margin-bottom: 10px;
+    }
 
-        .subtitle {
-            font-size: 1.2em;
-            color: #6B5B4F;
-            margin-bottom: 20px;
-        }
+    header p {
+      font-size: 18px;
+      color: #5f5647;
+    }
 
-        .contacts {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      flex: 1;
+    }
 
-        .contact-item {
-            background: #f5f0e8;
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
 
-        .contact-item a {
-            color: #5D4E37;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    .tab-button {
+      background: #8b7d62;
+      color: #f4efe5;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(63, 58, 47, 0.2);
+    }
 
-        section {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
+    .tab-button:hover {
+      background: #6f634d;
+      transform: translateY(-2px);
+    }
 
-        h2 {
-            font-size: 2em;
-            color: #5D4E37;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #8B7355;
-            padding-bottom: 10px;
-        }
+    .tab-button.active {
+      background: #4f5b45;
+    }
 
-        .about {
-            font-size: 1.1em;
-            line-height: 1.8;
-        }
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
 
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+    .tab-content.active {
+      display: block;
+    }
 
-        .tab {
-            padding: 15px 30px;
-            background: #f5f0e8;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1em;
-            color: #5D4E37;
-            transition: all 0.3s;
-        }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .tab:hover {
-            background: #e8e0d5;
-        }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      margin-bottom: 50px;
+    }
 
-        .tab.active {
-            background: #8B7355;
-            color: white;
-        }
+    .art-card {
+      background: #eee7d8;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(63, 58, 47, 0.18);
+      transition: 0.3s ease;
+    }
 
-        .tab-content {
-            display: none;
-        }
+    .art-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(63, 58, 47, 0.25);
+    }
 
-        .tab-content.active {
-            display: block;
-        }
+    .art-placeholder {
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      font-size: 20px;
+      color: #f5f0e6;
+      background: #7b6f58;
+    }
 
-        .portfolio {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+    .art-card:nth-child(2) .art-placeholder {
+      background: #6f7a5b;
+    }
 
-        .portfolio-item {
-            background: #f9f9f9;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
+    .art-card:nth-child(3) .art-placeholder {
+      background: #8a735f;
+    }
 
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-        }
+    .art-card:nth-child(4) .art-placeholder {
+      background: #5f6b63;
+    }
 
-        .portfolio-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+    .art-info {
+      padding: 18px;
+    }
 
-        .portfolio-item h3 {
-            padding: 15px;
-            color: #4a4a4a;
-        }
+    .art-info h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: #3b3328;
+    }
 
-        .portfolio-item p {
-            padding: 0 15px 15px;
-            color: #6B5B4F;
-        }
+    .art-info p {
+      font-size: 15px;
+      color: #625847;
+      line-height: 1.5;
+    }
 
-        .portfolio-item a {
-            display: block;
-            padding: 10px 15px;
-            background: #8B7355;
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            border-radius: 5px;
-        }
+    footer {
+      text-align: center;
+      padding: 35px 20px 45px;
+      background: rgba(79, 91, 69, 0.25);
+      margin-top: auto;
+    }
 
-        .portfolio-item a:hover {
-            background: #6B5B4F;
-        }
+    footer p {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #3f3a2f;
+    }
 
-        .commission-section {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            bo…
+    footer a {
+      color: #3f4f35;
+      font-size: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid #3f4f35;
+      transition: 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #6f634d;
+      border-bottom-color: #6f634d;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 32px;
+      }
+
+      .tab-button {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .art-placeholder {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Korobochka</h1>
+    <p>Art portfolio</p>
+  </header>
+
+  <main class="container">
+    <div class="tabs">
+      <button class="tab-button active" onclick="openTab('my-art', this)">My art</button>
+      <button class="tab-button" onclick="openTab('nsfw-art', this)">Nsfw art</button>
+    </div>
+
+    <section id="my-art" class="tab-content active">
+      <div class="gallery">
+        <div class="art-card">
+          <div class="art-placeholder">Example Artwork 1</div>
+          <div class="art-info">
+            <h3>Forest Mood</h3>
+            <p>A calm illustration inspired by muted natural colors.</p>
+          </div>
+        </div>
+
+        <div class="art-card">
+          <div class="art-placeholder">Example Artwork 2</div>
+          <div class="art-info">
+            <h3>Soft Character</h3>
+            <p>Character art with warm earthy tones and gentle atmosphere.</p>
+          </div>
+        </div>
+
+        <div class="art-card">
+          <div class="art-placeholder">Example Artwork 3</div>
+          <div class="art-info">
+            <h3>Autumn Sketch</h3>
+            <p>A cozy sketch example with brown, beige and green shades.</p>
+          </div>
+        </div>
+
+        <div class="art-card">
+          <div class="art-placeholder">Example Artwork 4</div>
+          <div class="art-info">
+            <h3>Nature Study</h3>
+            <p>Simple portfolio placeholder for your future artwork.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nsfw-art" class="tab-content">
+      <div class="gallery">
+        <div class="art-card">
+          <div class="art-placeholder">NSFW Example 1</div>
+          <div class="art-info">
+            <h3>Private Commission</h3>
+            <p>Example slot for mature artwork preview.</p>
+          </div>
+        </div>
+
+        <div class="art-card">
+          <div class="art-placeholder">NSFW Example 2</div>
+          <div class="art-info">
+            <h3>Adult Character Art</h3>
+            <p>Placeholder for NSFW commission examples.</p>
+          </div>
+        </div>
+
+        <div class="art-card">
+          <div class="art-placeholder">NSFW Example 3</div>
+          <div class="art-info">
+            <h3>Soft Mature Style</h3>
+            <p>Muted colors and natural palette for adult-themed artwork.</p>
+          </div>
+        </div>
+
+        <div class="art-card">
+          <div class="art-placeholder">NSFW Example 4</div>
+          <div class="art-info">
+            <h3>Commission Sample</h3>
+            <p>Replace this block with your own image and description.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Do you have a commission? Message me on Telegram!</p>
+    <a href="https://t.me/korobochka228" target="_blank">@korobochka228</a>
+  </footer>
+
+  <script>
+    function openTab(tabId, button) {
+      const contents = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-button');
+
+      contents.forEach(content => {
+        content.classList.remove('active');
+      });
+
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      document.getElementById(tabId).classList.add('active');
+      button.classList.add('active');
+    }
+  </script>
+</body>
+</html>
