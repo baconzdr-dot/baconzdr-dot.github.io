@@ -89,7 +89,8 @@
         }
         img {
             width: 100%;
-            height: auto;
+            height: 300px; /* Фиксированный размер картинок */
+            object-fit: cover; /* Обрезка с сохранением пропорций */
             display: block;
             transition: transform 0.3s ease;
         }
@@ -165,8 +166,8 @@
         <h1>Korobochka</h1>
 
         <div class="tabs">
-            <button class="tab-btn active" data-tab="my-art">1. My art</button>
-            <button class="tab-btn" data-tab="nsfw-art">2. Nsfw art</button>
+            <button class="tab-btn active" data-tab="my-art">My art</button>
+            <button class="tab-btn" data-tab="nsfw-art">Nsfw art</button>
         </div>
 
         <!-- Вкладка "My art" -->
