@@ -10,7 +10,7 @@
             --secondary: #7a5a0f;
             --accent: #4a3c2e;
             --background: #6b5a46;
-            --dark: #221a12; /* Темнее для заголовков и ссылок */
+            --dark: #221a12;
             --light: #f5f5f0;
         }
         body {
@@ -36,43 +36,6 @@
             color: var(--dark);
             font-size: 16px;
             margin-bottom: 40px;
-        }
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        button {
-            padding: 12px 24px;
-            border: none;
-            background-color: var(--primary);
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        button:hover {
-            background-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-        button.active {
-            background-color: var(--accent);
-            color: white;
-            box-shadow: 0 6px 20px rgba(74, 60, 46, 0.3);
-        }
-        .tab-content {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .tab-content.active {
-            opacity: 1;
-            transform: scale(1);
         }
         .gallery {
             display: grid;
@@ -100,10 +63,12 @@
         }
         .image-title {
             text-align: center;
-            padding: 10px 0;
-            font-size: 14px;
+            padding: 15px 0;
+            font-size: 18px; /* Увеличен размер шрифта */
             color: var(--light);
-            background-color: var(--dark); /* Белая плашка */
+            background-color: var(--dark);
+            margin: 0; /* Убираем отступы */
+            font-weight: bold; /* Делаем текст жирным */
         }
         footer {
             text-align: center;
@@ -113,7 +78,7 @@
             color: var(--dark);
         }
         a {
-            color: var(--dark); /* Темнее для ссылок */
+            color: var(--dark);
             text-decoration: none;
         }
         a:hover {
@@ -163,13 +128,8 @@
 <body>
     <div class="container">
         <h1>Korobochka</h1>
-        <p class="channel-info">My telegram channel: t.me/korobushka228</p>
+        <p class="channel-info">My telegram channel: <a href="https://t.me/korobushka228" target="_blank">t.me/korobushka228</a></p>
 
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="my-art">My art</button>
-        </div>
-
-        <!-- Вкладка "My art" -->
         <div id="my-art" class="tab-content active">
             <h2>My art</h2>
             <div class="gallery">
@@ -206,7 +166,7 @@
 
         <footer>
             <p>Do you have a commission? Message me on Telegram!</p>
-            <a href="https://t.me/korobochka228">@korobochka228</a>
+            <a href="https://t.me/korobochka228" target="_blank">@korobochka228</a>
         </footer>
     </div>
 
@@ -219,18 +179,6 @@
     </div>
 
     <script>
-        // Переключение вкладок
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-                btn.classList.add('active');
-                const tabId = btn.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-
         // Открытие модального окна
         function openModal(src, title) {
             document.getElementById('modal-image').src = src;
