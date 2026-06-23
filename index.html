@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Korobochka — portfolio</title>
     <style>
+        :root {
+            --primary: #8b6914;
+            --secondary: #7a5a0f;
+            --accent: #4a3c2e;
+            --background: #6b5a46;
+            --dark: #332a22;
+            --light: #f5f5f0;
+        }
         body {
-            font-family: Verdana, sans-serif;
-            background-color: #d4e7c9;
-            color: #333;
+            font-family: 'Verdana', sans-serif;
+            background-color: var(--background);
+            color: var(--dark);
             margin: 0;
             padding: 20px;
             line-height: 1.6;
+            min-height: 100vh;
         }
         .container {
             max-width: 1200px;
@@ -19,8 +28,9 @@
             text-align: center;
         }
         h1 {
-            color: #4a3c2e;
+            color: var(--accent);
             margin-bottom: 40px;
+            font-size: 2.2rem;
         }
         .tabs {
             display: flex;
@@ -31,21 +41,24 @@
         button {
             padding: 12px 24px;
             border: none;
-            background-color: #8b6914;
+            background-color: var(--primary);
             color: white;
             cursor: pointer;
             font-size: 16px;
+            font-weight: 600;
             border-radius: 12px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         button:hover {
-            background-color: #7a5a0f;
+            background-color: var(--secondary);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
         button.active {
-            background-color: #6b4b0c;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            background-color: var(--accent);
+            color: white;
+            box-shadow: 0 6px 20px rgba(74, 60, 46, 0.3);
         }
         .tab-content {
             opacity: 0;
@@ -63,8 +76,9 @@
             margin-bottom: 40px;
         }
         .image-card {
-            border-radius: 8px;
+            position: relative;
             overflow: hidden;
+            border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.12);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
@@ -75,17 +89,21 @@
         }
         img {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
+            height: auto;
             display: block;
             transition: transform 0.3s ease;
         }
         .image-title {
+            text-align: center;
             padding: 10px 0;
             font-size: 14px;
-            color: #554a42;
+            color: var(--accent);
             font-style: italic;
-            background: linear-gradient(to bottom, #f5f5f0, transparent);
+            background: linear-gradient(to bottom, var(--light), transparent);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
         }
         footer {
             text-align: center;
@@ -95,7 +113,7 @@
             color: #666;
         }
         a {
-            color: #4a3c2e;
+            color: var(--accent);
             text-decoration: none;
         }
         a:hover {
@@ -123,12 +141,13 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: #1a1511;
         }
         .modal-img {
             max-width: 100%;
             max-height: calc(100vh - 100px);
             border-radius: 6px;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .close-btn {
             position: absolute;
@@ -234,6 +253,14 @@
         function openModal(src, title) {
             document.getElementById('modal-image').src = src;
             document.getElementById('modal').style.display = 'flex';
+
+            // Плавное увеличение до оригинального размера
+            const img = document.querySelector('.modal-img');
+            img.style.transform = 'scale(0)';
+            requestAnimationFrame(() => {
+                img.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                img.style.transform = 'scale(1)';
+            });
         }
 
         // Закрытие модального окна
